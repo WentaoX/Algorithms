@@ -13,9 +13,11 @@ def countInves(A):
     the fast divide-and-conquer algorithm is used.
     '''
     with open(A, 'r') as f:
-        alist = f.read()
+        strlist = f.read()
+    strlist = strlist.split()
+    # each element is string, change it to int
+    alist = [int(x) for x in strlist]
     
-    alist = alist.split()
     print(len(alist))
     global inversions
     inversions = int(0)
