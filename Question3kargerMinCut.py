@@ -89,7 +89,7 @@ if __name__ == "__main__":
     # probabilty of fail <= 1/N, in fact, with trials_num = 200, got the right answer
     # then try trials_num = 40000, takes quite a long time. 
     trials_num = int(N**2*np.log(N)) # probabilty of fail <= 1/N
-    print(trials_num)
+    #print(trials_num)
     final_min_cut = kargerMinCut(gd, trials_num)
     print(final_min_cut)
 
