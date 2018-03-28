@@ -29,7 +29,7 @@ class MaxHeap():
                 
     def swap(self, p, c):
         # recursively swap until parent is larger than child{}
-        print("swap {} and {}".format(p,c))
+        #print("swap {} and {}".format(p,c))
         i = self.list[c-1]
         self.list[c-1] = self.list[p-1]
         self.list[p-1] = i
@@ -90,6 +90,10 @@ class MaxHeap():
             self.bubbleup(1)
         return r
                 
+    def readhead(self):
+        return self.list[0]
+    
+    
 class MinHeap():
     def __init__(self):
         self.list = [] # add a zero so that the fist element is indexed as 1 
@@ -107,7 +111,7 @@ class MinHeap():
                 
     def swap(self, p, c):
         # recursively swap until parent is larger than child{}
-        print("swap {} and {}".format(p,c))
+        #print("swap {} and {}".format(p,c))
         i = self.list[c-1]
         self.list[c-1] = self.list[p-1]
         self.list[p-1] = i
@@ -167,15 +171,42 @@ class MinHeap():
         else:
             self.bubbleup(1)
         return r
+    
+    def readhead(self):
+        return self.list[0]
 
-t = [1,5,3,0,9,4, 7,2,11,6]
-mh = MinHeap()
-#min_heap = MinHeap()
-for e in t:
-    mh.insert(e)
-    #min_heap.insert(e)
-print(mh.list)
-#print(min_heap.list)
+#t = [1,5,3,0,9,4, 7,2,11,6,2,8,10,14,17]
+if __name__ == "__main__":
+    
+    with open("Median.txt", 'r') as f:
+        lines = f.read()
+    lines = lines.split("\n")
+    t = [int(e) for e in lines[:-1]]
+    
+    minh = MinHeap()
+    maxh = MaxHeap()
+    medianSum = 0
+    for e in t:
+        if maxh.len <= 1: # first two element in 
+            maxh.insert(e)
+        elif maxh.readhead() < e:
+            minh.insert(e)
+        else:
+            maxh.insert(e)
+        lendiff = maxh.len - minh.len 
+            
+        if lendiff == 2: # maxh.len is too long
+            minh.insert(maxh.pophead())
+        if lendiff == -1:
+            maxh.insert(minh.pophead())
+        #     if lendiff == 0 or lendiff == 1: do nothing
+        #median.append(maxh.readhead())
+        medianSum += maxh.readhead()
+        
+
+    print(medianSum%10000)
+    
+    
                 
             
             
